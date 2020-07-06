@@ -1,10 +1,10 @@
-# [Customer App](https://github.com/lone-wolf-rsh/customer-app/)
+# [Customer App](https://github.com/mr-wolf-rsh/customer-app/)
 
 Pequeño módulo de gestión de clientes utilizando Angular y Firebase.
 
 ## Autor(es)
 
-* **Renzo S.** - *Final work* - [lone-wolf-rsh](https://github.com/lone-wolf-rsh/)
+* **Renzo S.** - *Final work* - [mr-wolf-rsh](https://github.com/mr-wolf-rsh/)
 
 ## Contributing
 
