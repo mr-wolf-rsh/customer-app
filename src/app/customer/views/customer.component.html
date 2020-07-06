@@ -1,0 +1,129 @@
+<div class="d-flex justify-content-center align-self-center" *ngIf="!(customersList$ | async)">
+  <div class="spinner-grow text-info" role="status">
+    <span class="sr-only">Cargando...</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-8">
+    <div class="card" *ngIf="customersList$ | async as cList">
+      <div class="card-header">
+        <h1 class="card-title">Clientes</h1>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped table-hover" style="text-align: center">
+          <thead>
+            <tr>
+              <th>Índice</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Edad</th>
+              <th>Fecha de nacimiento</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of cList; let i = index">
+              <td>{{ (i + 1) }}</td>
+              <td>{{ customer.firstName }}</td>
+              <td>{{ customer.lastName }}</td>
+              <td>{{ customer.age }}</td>
+              <td>{{ customer.birthday | date: 'dd-MM-yyyy' }}</td>
+              <td>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteCustomer(customer.key)"
+                  data-toggle="tooltip" data-placement="top" title="Eliminar">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer" *ngIf="customersList$ | async as cList">
+        <div class="col-12 row fullcenter">
+          <div class="col-6">
+            <label>Promedio de edades: {{ getCalculation(cList, false) }}</label>
+          </div>
+          <div class="col-6">
+            <label>Desviación estándar de edades: {{ getCalculation(cList, true) }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <form name="addForm" (ngSubmit)="addNewCustomer(addForm.form)" #addForm="ngForm">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Nuevo Cliente</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-4">
+              <label for="addFirstName">Nombre:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" name="addFirstName" #addFirstName="ngModel"
+                [(ngModel)]="customerRequest.firstName" required>
+              <div *ngIf="setValidationMessageCondition(addFirstName)" class="text-danger">
+                <div *ngIf="addFirstName.errors.required">
+                  El nombre es requerido.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-4">
+              <label for="addLastName">Apellido:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" name="addLastName" #addLastName="ngModel"
+                [(ngModel)]="customerRequest.lastName" required>
+              <div *ngIf="setValidationMessageCondition(addLastName)" class="text-danger">
+                <div *ngIf="addLastName.errors.required">
+                  El apellido es requerido.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-4">
+              <label for="addAge">Edad:</label>
+            </div>
+            <div class="col-8">
+              <input type="number" class="form-control" name="addAge" #addAge="ngModel"
+                [(ngModel)]="customerRequest.age" pattern="^([1-9][0-9]?)$" required>
+              <div *ngIf="setValidationMessageCondition(addAge)" class="text-danger">
+                <div *ngIf="addAge.errors.required">
+                  La edad es requerida.
+                </div>
+                <div *ngIf="addAge.errors.pattern">
+                  Debe ser un número del 1 al 99.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-4">
+              <label for="addBirthday">Fecha de nacimiento:</label>
+            </div>
+            <div class="col-8">
+              <input type="date" class="form-control" name="addBirthday" #addBirthday="ngModel"
+                [ngModel]="customerRequest.birthday | date: 'yyyy-MM-dd'"
+                (ngModelChange)="customerRequest.birthday = $event" required>
+              <div *ngIf="setValidationMessageCondition(addBirthday)" class="text-danger">
+                <div *ngIf="addBirthday.errors.required">
+                  La fecha de nacimiento es requerida.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="col-3 fullcenter">
+            <button type="submit" class="btn btn-success" [disabled]="addForm.form.invalid">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

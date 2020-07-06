@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.fullcenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+label {
+  padding-top: .5rem;
+  margin-bottom: auto;
+}
+
+.btn.disabled,
+.btn:disabled {
+  opacity: .40;
+}
