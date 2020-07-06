@@ -1,6 +1,6 @@
-# Customer App
+# [Customer App](https://github.com/lone-wolf-rsh/customer-app/)
 
-Pequeño módulo de gestión de clientes.
+Pequeño módulo de gestión de clientes utilizando Angular y Firebase.
 
 ## Autor(es)
 
