@@ -8,7 +8,7 @@ Small module for customer management using Angular and Firebase.
 
 ## Contributing
 
-TAll sorts of suggestions are welcome. This has academic purposes only, it may have vulnerabilities.
+All sorts of suggestions are welcome. This has academic purposes only, it may have vulnerabilities.
 
 ## License
 
